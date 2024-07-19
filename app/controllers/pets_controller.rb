@@ -29,13 +29,13 @@ class PetsController < ApplicationController
   end
 
   def update
-    @pet = Pet.find_by(id: pet_id)
+    @pet = Pet.find_by(id: params[:id])
     @pet.name = params[:name]
     @pet.breed = params[:breed]
     @pet.age = params[:age]
     @pet.save
     
-    redirect_to "/cars/#{@car.id}"
+    redirect_to "/pets/#{@pet.id}"
 
   end
 

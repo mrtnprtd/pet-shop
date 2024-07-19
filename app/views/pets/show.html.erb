@@ -2,6 +2,6 @@
 <p>Breed: <%= @pet.breed %></p>
 <p>Age: <%= @pet.age %></p>
 
-<%= button_to "Edit Pet", edit_pet_path(@pet), method: :get %>
-<%= button_to "Delete Pet", pet_path(@pet), method: :delete, data: { confirm: 'Are you sure?'  } %>
-<%= button_to "Back to Inventory", pets_path, method: :get %>
+<%= button_to "Edit Pet", "/pets/#{@pet.id}/edit", method: :get %>
+<%= button_to "Delete Pet", "/pets/#{@pet.id}", method: :delete %>
+<%= button_to "Back to Pets", "/pets", method: :get %>

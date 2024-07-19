@@ -1,8 +1,10 @@
-<h1>All Pets</h1>
-<ul>
+<h1>Take a look at all our Pets: </h1>
+<div>
 <% @pets.each do |pet| %>
-    <li><%= link_to pet.name, pet_path(pet) %></li>
-    <% end %>
-</ul>
-
-<%= link_to 'New Pet', new_pet_path %>
+    <a href= "https://localhost:3000/pets/<%=pet.id%>"> <%= pet.name + " " + pet.breed + " " + pet.age %> </a>
+    
+</div>
+<% end %>
+<br>
+<br>
+<%= button_to 'New Pet', "/cars/new", method: :get %>
