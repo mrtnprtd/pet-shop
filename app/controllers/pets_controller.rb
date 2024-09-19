@@ -30,10 +30,29 @@ class PetsController < ApplicationController
 
   def update
     @pet = Pet.find_by(id: params[:id])
-    @pet.name = params[:name]
-    @pet.breed = params[:breed]
-    @pet.age = params[:age]
+
+    puts "*" * 100
+    puts "params[:pet_name]"
+    puts params[:pet_name].inspect
+    puts "*" * 100
+    @pet.name = params[:pet_name]
+
+    puts "params[:pet_breed]"
+    puts params[:pet_breed].inspect
+    puts "*" * 100
+    @pet.breed = params[:pet_breed]
+
+    puts "*" * 100
+    puts "params[:pet_age]"
+    puts params[:pet_age].inspect
+    puts "*" * 100
+    @pet.age = params[:pet_age]
     @pet.save
+
+    puts "*" * 100
+    puts "params"
+    puts params.inspect
+    puts "*" * 100
     
     redirect_to "/pets/#{@pet.id}"
 
