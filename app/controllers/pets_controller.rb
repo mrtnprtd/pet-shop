@@ -5,6 +5,7 @@ class PetsController < ApplicationController
       puts pet.name
       puts pet.breed
       puts pet.age
+      puts pet.bio
     end
   end
 
@@ -15,7 +16,8 @@ class PetsController < ApplicationController
     input_name = params[:pet_name]
     input_breed = params[:pet_breed]
     input_age = params[:pet_age]
-    @pet_add = Pet.create(name: input_name, breed: input_breed, age: input_age)
+    input_bio = params[:pet_bio]
+    @pet_add = Pet.create(name: input_name, breed: input_breed, age: input_age, bio: input_bio)
   end
 
   def show
@@ -37,6 +39,7 @@ class PetsController < ApplicationController
     puts "*" * 100
     @pet.name = params[:pet_name]
 
+    puts "*" * 100
     puts "params[:pet_breed]"
     puts params[:pet_breed].inspect
     puts "*" * 100
@@ -47,6 +50,12 @@ class PetsController < ApplicationController
     puts params[:pet_age].inspect
     puts "*" * 100
     @pet.age = params[:pet_age]
+
+    puts "*" * 100
+    puts "params[:pet_bio]"
+    puts params[:pet_bio].inspect
+    puts "*" * 100
+    @pet.bio = params[:pet_bio]
     @pet.save
 
     puts "*" * 100
@@ -59,8 +68,14 @@ class PetsController < ApplicationController
   end
 
   def destroy
-    @pet = Pet.find_by(id: pet_id)
+    @pet = Pet.find_by(id: params[:id])
     @pet.destroy
     redirect_to "/pets"
+  end
+
+  private
+
+  def pet_params
+    params.require(:pet).permit(:name, :age, :breed, :bio)
   end
 end
