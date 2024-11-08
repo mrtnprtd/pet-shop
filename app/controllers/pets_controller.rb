@@ -73,9 +73,34 @@ class PetsController < ApplicationController
     redirect_to "/pets"
   end
 
+  # Action for rendering the signup form
+  def new_signup
+    @pet = Pet.new
+  end
+
+  # New action for handling user signup
+  def signup
+    @pet = Pet.new(pet_params)
+    if @pet.save
+      render json: @pet, status: :created
+    else
+      render json: { errors: @pet.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  # New action for handling user login
+  def login
+    @pet = Pet.find_by(name: params[:name])
+    if @pet&.authenticate(params[:password])
+      render json: @pet, status: :ok
+    else
+      render json: { errors: 'Invalid name or password' }, status: :unauthorized
+    end
+  end
+
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :age, :breed, :bio)
+    params.require(:pet).permit(:name, :age, :breed, :bio, :password, :password_confirmation)
   end
 end
